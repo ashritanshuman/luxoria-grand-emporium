@@ -60,6 +60,12 @@ export default {
           DEFAULT: "hsl(var(--silver))",
           light: "hsl(var(--silver-light))",
         },
+        bronze: {
+          DEFAULT: "hsl(var(--bronze))",
+        },
+        champagne: {
+          DEFAULT: "hsl(var(--champagne))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

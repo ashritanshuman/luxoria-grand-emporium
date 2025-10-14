@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ShoppingCart, Menu, X, Search, User } from "lucide-react";
+import { ShoppingCart, Menu, X, Search, User, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useTheme } from "@/components/ThemeProvider";
 
 interface NavigationProps {
   cartItemsCount?: number;
@@ -12,6 +13,7 @@ const Navigation = ({ cartItemsCount = 0 }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,10 +34,10 @@ const Navigation = ({ cartItemsCount = 0 }: NavigationProps) => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+          ? "bg-background/95 backdrop-blur-md shadow-lg border-b border-border"
+          : "bg-background/40 backdrop-blur-sm"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
@@ -87,6 +89,17 @@ const Navigation = ({ cartItemsCount = 0 }: NavigationProps) => {
               className="hidden sm:flex hover:text-gold transition-colors"
             >
               <User className="h-5 w-5" />
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="hover:text-gold transition-colors"
+            >
+              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
             </Button>
 
             <Link to="/cart">
